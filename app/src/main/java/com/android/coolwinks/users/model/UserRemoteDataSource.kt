@@ -24,7 +24,7 @@ class UserRemoteDataSource @Inject constructor(private val service: ApiService) 
             }
         } catch (e: Exception) {
             if (e is IOException) {
-                return DataResult.Error("Please check your network connection")
+                return DataResult.Error("Network failure. Please try again later")
             } else {
                 return DataResult.Error("Unknown error")
             }

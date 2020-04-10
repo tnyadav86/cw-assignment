@@ -3,6 +3,8 @@ package com.android.coolwinks.flickr.model
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
+import com.android.coolwinks.AppConstant
+import com.android.coolwinks.AppConstant.PAGE_SIZE
 import com.android.coolwinks.utils.TaskStatusResult
 
 class FlickrBoundaryCondition(
@@ -10,7 +12,7 @@ class FlickrBoundaryCondition(
     private val flickerLocalDataSource: FlickerLocalDataSource
 ) : PagedList.BoundaryCallback<Photo>() {
 
-    private var lastRequestedPage = 1
+    private var lastRequestedPage = AppConstant.FLICKR_INITIAL_PAGE
 
     val _taskStatusLiveData = MutableLiveData<TaskStatusResult>()
     // LiveData of network errors.
@@ -27,7 +29,7 @@ class FlickrBoundaryCondition(
         _taskStatusLiveData.postValue(TaskStatusResult.Loading())
         flickrRemoteDataSource.getPhotoFromFlickrAPI(
             lastRequestedPage.toString(),
-            NETWORK_PAGE_SIZE.toString(),
+            PAGE_SIZE.toString(),
             {
                 lastRequestedPage = it.page
                 flickerLocalDataSource.insertPhoto(it.photo) {
@@ -48,21 +50,18 @@ class FlickrBoundaryCondition(
         lastRequestedPage++
         flickrRemoteDataSource.getPhotoFromFlickrAPI(
             lastRequestedPage.toString(),
-            NETWORK_PAGE_SIZE.toString(),
+            PAGE_SIZE.toString(),
             {
                 lastRequestedPage = it.page
                 flickerLocalDataSource.insertPhoto(it.photo) {
                     isRequestInProgress = false
+                    _taskStatusLiveData.postValue(TaskStatusResult.Success())
                 }
             },
             {
                 isRequestInProgress = false
-                if (_taskStatusLiveData.value!=TaskStatusResult.Error(it))
                 _taskStatusLiveData.postValue(TaskStatusResult.Error(it))
             })
     }
 
-    companion object {
-        private const val NETWORK_PAGE_SIZE = 50
-    }
 }

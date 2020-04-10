@@ -22,8 +22,8 @@ class UserMessageAdapter(val recyclerViewItemClickListener: RecyclerViewItemClic
         return user.size
     }
 
-    fun getItemList(): ArrayList<User> {
-        return user
+    fun getItemAtPosition(position: Int): User {
+        return user.get(position)
     }
 
     fun submitList(newUserList: List<User>) {

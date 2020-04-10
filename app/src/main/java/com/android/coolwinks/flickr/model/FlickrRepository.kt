@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.android.coolwinks.AppConstant.FLICKR_INITIAL_PAGE
+import com.android.coolwinks.AppConstant.PAGE_SIZE
+import com.android.coolwinks.AppConstant.PREFETCH_DISTANCE
 import com.android.coolwinks.utils.RepoResult
 import com.android.coolwinks.utils.TaskStatusResult
 import javax.inject.Inject
@@ -15,13 +18,13 @@ class FlickrRepository @Inject constructor(
 
     private val pageListConfig by lazy {
         PagedList.Config.Builder()
-            .setPageSize(50)
-            .setPrefetchDistance(10)
+            .setPageSize(PAGE_SIZE)
+            .setPrefetchDistance(PREFETCH_DISTANCE)
             .setEnablePlaceholders(false)
             .build()
     }
 
-    fun getPhotos(): RepoResult<PagedList<Photo>> {
+   suspend fun getPhotos(): RepoResult<PagedList<Photo>> {
 
         val dataSourceFactory = flickerLocalDataSource.getPhotos()
         // Construct the boundary callback
@@ -41,8 +44,8 @@ class FlickrRepository @Inject constructor(
     fun refreshPhotos(): LiveData<TaskStatusResult> {
         val data = MutableLiveData<TaskStatusResult>()
         flickrRemoteDataSource.getPhotoFromFlickrAPI(
-            "1",
-            "50",
+            FLICKR_INITIAL_PAGE.toString(),
+            PAGE_SIZE.toString(),
             {
                 if (it.photo.isNotEmpty()){
                     flickerLocalDataSource.deletePhoto {

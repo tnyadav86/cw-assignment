@@ -14,7 +14,4 @@ data class User(
 ) {
     @Ignore
     var isExpended = false
-    override fun toString(): String {
-        return "User(id=$id, title='$title', userId=$userId)"
-    }
 }

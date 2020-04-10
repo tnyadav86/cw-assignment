@@ -16,7 +16,7 @@ class FlickerLocalDataSource @Inject constructor(private val photoDao: PhotoDao)
         deleteFinished()
     }
 
-    fun getPhotos(): DataSource.Factory<Int, Photo> {
+    suspend fun getPhotos(): DataSource.Factory<Int, Photo> {
         return photoDao.getPhotos()
     }
 }

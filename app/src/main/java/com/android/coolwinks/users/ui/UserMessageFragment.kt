@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.android.coolwings.R
 import com.android.coolwinks.BaseDaggerFragment
 import com.android.coolwinks.RecyclerViewItemClickListener
@@ -34,7 +35,7 @@ class UserMessageFragment : BaseDaggerFragment(), RecyclerViewItemClickListener 
     private val userDataObserver = Observer<List<User>> {
         if (it.isNotEmpty()) {
             loadingView.gone()
-            lastSelectedPosition=-1
+            lastSelectedPosition = -1
             userMessageAdapter.submitList(it)
         }
 
@@ -55,18 +56,47 @@ class UserMessageFragment : BaseDaggerFragment(), RecyclerViewItemClickListener 
         viewModel.getAllUserMessageById(args.userId)
         userMessageAdapter = UserMessageAdapter(this)
         userMessageRecyclerView.adapter = userMessageAdapter
+        userMessageRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                appCompatActivity,
+                DividerItemDecoration.VERTICAL
+            )
+        )
     }
 
-    override fun onItemClick(data: Any?) {
-        data as Int
-        val list = userMessageAdapter.getItemList()
-        list.get(data).isExpended = !list.get(data).isExpended
-        userMessageAdapter.notifyItemChanged(data)
-        if (data != lastSelectedPosition && lastSelectedPosition >= 0) {
-            list.get(lastSelectedPosition).isExpended = !list.get(lastSelectedPosition).isExpended
-            userMessageAdapter.notifyItemChanged(lastSelectedPosition)
+    override fun onItemClick(currentSelectPosition: Any?) {
+        //Implementing logic for avoiding notifyDataSetChanged
+        //just notifying last and current selected item position
+
+        currentSelectPosition as Int
+        var lastSelectedUser: User? = null
+        if (lastSelectedPosition >= 0) {
+            lastSelectedUser = userMessageAdapter.getItemAtPosition(lastSelectedPosition)
         }
-        lastSelectedPosition = data
+        val currentSelectedUser = userMessageAdapter.getItemAtPosition(currentSelectPosition)
+
+        if (lastSelectedUser == null) {
+            // first time/third time selection for same item
+            currentSelectedUser.isExpended = !currentSelectedUser.isExpended
+            userMessageAdapter.notifyItemChanged(currentSelectPosition)
+            lastSelectedPosition = currentSelectPosition
+        } else {
+            if (lastSelectedUser == currentSelectedUser) {
+                // same item selected 2 time successively
+                currentSelectedUser.isExpended = !currentSelectedUser.isExpended
+                userMessageAdapter.notifyItemChanged(currentSelectPosition)
+                lastSelectedPosition = -1
+            } else {
+                //Two different item selected successively
+                currentSelectedUser.isExpended = !currentSelectedUser.isExpended
+                userMessageAdapter.notifyItemChanged(currentSelectPosition)
+                lastSelectedUser.isExpended = !lastSelectedUser.isExpended
+                userMessageAdapter.notifyItemChanged(lastSelectedPosition)
+                lastSelectedPosition = currentSelectPosition
+
+            }
+        }
+
     }
 
 }
