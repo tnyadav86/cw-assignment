@@ -1,7 +1,8 @@
-package com.android.coolwinks.di.user.module
+package com.android.coolwinks.di.module
 
 import android.app.Application
 import com.android.coolwinks.database.AppDatabase
+import com.android.coolwinks.database.dao.PhotoDao
 import com.android.coolwinks.database.dao.UserDao
 import com.android.coolwinks.network.ApiClient
 import com.android.coolwinks.network.ApiService
@@ -18,6 +19,11 @@ class DataSourceModule {
     @Provides
     fun provideUserDao(application: Application): UserDao {
         return AppDatabase.getInstance(application.applicationContext).userDao()
+    }
+
+    @Provides
+    fun providePhotoDao(application: Application): PhotoDao {
+        return AppDatabase.getInstance(application.applicationContext).photoDao()
     }
 
 }

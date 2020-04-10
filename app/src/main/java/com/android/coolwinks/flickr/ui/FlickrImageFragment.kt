@@ -29,7 +29,7 @@ class FlickrImageFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val imageUrl = args.imageUrl
-        Log.e("url", imageUrl)
+        Log.e("url", imageUrl.toString())
         imgThumbnail.isZoomEnabled = true
         Glide.with(appCompatActivity)
             .load(imageUrl)

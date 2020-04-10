@@ -26,5 +26,18 @@
         android:id="@+id/userFragment"
         android:name="com.android.coolwinks.users.ui.UserFragment"
         android:label="Users"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_userMessageFragment"
+            app:destination="@id/userMessageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userMessageFragment"
+        android:name="com.android.coolwinks.users.ui.UserMessageFragment"
+        android:label="User Message"
+        tools:layout="@layout/fragment_user_message" >
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

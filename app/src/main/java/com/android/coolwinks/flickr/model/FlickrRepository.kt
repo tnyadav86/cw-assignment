@@ -6,8 +6,9 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.android.coolwinks.utils.RepoResult
 import com.android.coolwinks.utils.TaskStatusResult
+import javax.inject.Inject
 
-class FlickrRepository(
+class FlickrRepository @Inject constructor(
     private val flickrRemoteDataSource: FlickrRemoteDataSource,
     private val flickerLocalDataSource: FlickerLocalDataSource
 ) {

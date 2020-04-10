@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.android.coolwings.R
 import com.android.coolwinks.BaseDaggerFragment
 import com.android.coolwinks.RecyclerViewItemClickListener
@@ -75,7 +76,8 @@ class UserFragment : BaseDaggerFragment(), RecyclerViewItemClickListener {
     }
 
     override fun onItemClick(data: Any?) {
-
+       val action= UserFragmentDirections.actionUserFragmentToUserMessageFragment(data as Int)
+        findNavController().navigate(action)
     }
 
 }

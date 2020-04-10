@@ -13,4 +13,8 @@ class UserLocalDataSource @Inject constructor(private val userDao: UserDao) {
     suspend fun getAllUserIds(): LiveData<List<Int>> {
         return userDao.getAllUsersIDs()
     }
+
+    suspend fun getAllUserById(userId:Int): LiveData<List<User>> {
+        return userDao.getAllUsersByID(userId)
+    }
 }

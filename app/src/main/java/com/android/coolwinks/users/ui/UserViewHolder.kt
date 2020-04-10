@@ -3,6 +3,7 @@ package com.android.coolwinks.users.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.android.coolwings.R
 import com.android.coolwinks.RecyclerViewItemClickListener
@@ -31,5 +32,10 @@ class UserViewHolder(
     fun bindTo(user: Int) {
         this.userId = user
         nameView.text = "User$userId"
+        if (adapterPosition%2==0){
+            itemView.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.white))
+        }else{
+            itemView.setBackgroundColor(ContextCompat.getColor(itemView.context,R.color.grayLight))
+        }
     }
 }

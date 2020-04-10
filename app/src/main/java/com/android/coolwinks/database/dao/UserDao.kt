@@ -15,6 +15,9 @@ interface UserDao {
     @Query("SELECT DISTINCT userId from User ORDER BY userId ASC")
     fun getAllUsersIDs(): LiveData<List<Int>>
 
+    @Query("SELECT * from User WHERE userId = :userId")
+    fun getAllUsersByID(userId : Int): LiveData<List<User>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(stateList: List<User>)
 }

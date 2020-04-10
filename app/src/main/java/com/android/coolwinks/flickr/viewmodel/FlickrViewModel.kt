@@ -7,8 +7,9 @@ import androidx.paging.PagedList
 import com.android.coolwinks.flickr.model.FlickrRepository
 import com.android.coolwinks.flickr.model.Photo
 import com.android.coolwinks.utils.RepoResult
+import javax.inject.Inject
 
-class FlickrViewModel(private val repository: FlickrRepository) : ViewModel() {
+class FlickrViewModel @Inject constructor(private val repository: FlickrRepository) : ViewModel() {
     private val flickrRepoResult = MutableLiveData<RepoResult<PagedList<Photo>>>()
 
     val photoListLivedata = flickrRepoResult.switchMap {

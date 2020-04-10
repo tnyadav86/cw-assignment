@@ -10,24 +10,29 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import com.android.coolwings.R
-import com.android.coolwinks.BaseFragment
+import com.android.coolwinks.BaseDaggerFragment
 import com.android.coolwinks.RecyclerViewItemClickListener
-import com.android.coolwinks.database.AppDatabase
-import com.android.coolwinks.flickr.model.*
+import com.android.coolwinks.flickr.model.Photo
 import com.android.coolwinks.flickr.viewmodel.FlickrViewModel
-import com.android.coolwinks.network.ApiClient
-import com.android.coolwinks.network.ApiService
 import com.android.coolwinks.utils.TaskStatusResult
 import com.android.coolwinks.utils.gone
 import com.android.coolwinks.utils.toast
 import com.android.coolwinks.utils.visible
 import kotlinx.android.synthetic.main.fragment_flicker.*
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class FlickrFragment : BaseFragment(), RecyclerViewItemClickListener {
-    private lateinit var viewModel: FlickrViewModel
+class FlickrFragment : BaseDaggerFragment(), RecyclerViewItemClickListener {
+
+    @Inject
+    lateinit var viewModelProviderFactory: ViewModelProvider.Factory
+
+    private val viewModel: FlickrViewModel by lazy {
+        ViewModelProvider(this, viewModelProviderFactory).get(FlickrViewModel::class.java)
+    }
+
     private lateinit var flickrAdapter: FlickrAdapter
 
     private val flickrDataObserver = Observer<PagedList<Photo>> {
@@ -67,21 +72,6 @@ class FlickrFragment : BaseFragment(), RecyclerViewItemClickListener {
             }
         }
 
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val apiService = ApiClient.client.create(ApiService::class.java)
-        val flickrRemoteDataSource = FlickrRemoteDataSource(apiService)
-        val photoDao = AppDatabase.getInstance(appCompatActivity).photoDao()
-        val flickerLocalDataSource = FlickerLocalDataSource(photoDao)
-        val flickrRepository = FlickrRepository(flickrRemoteDataSource, flickerLocalDataSource)
-
-        viewModel = ViewModelProvider(
-            this,
-            FlickrViewModelFactory(flickrRepository)
-        ).get(FlickrViewModel::class.java)
     }
 
     override fun onCreateView(

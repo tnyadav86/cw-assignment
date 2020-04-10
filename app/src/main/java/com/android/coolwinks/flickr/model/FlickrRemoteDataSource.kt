@@ -4,8 +4,9 @@ import com.android.coolwinks.network.ApiService
 import okio.IOException
 import retrofit2.Call
 import retrofit2.Response
+import javax.inject.Inject
 
-class FlickrRemoteDataSource(private val service: ApiService) {
+class FlickrRemoteDataSource @Inject constructor(private val service: ApiService) {
     fun getPhotoFromFlickrAPI(
         page: String, perPage: String,
         onSuccess: (photos: Photos) -> Unit,

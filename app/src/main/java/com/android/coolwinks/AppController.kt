@@ -1,6 +1,6 @@
 package com.android.coolwinks
 
-import com.android.coolwinks.di.user.component.DaggerAppComponent
+import com.android.coolwinks.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 

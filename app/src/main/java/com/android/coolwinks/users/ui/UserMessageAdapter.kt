@@ -3,27 +3,32 @@ package com.android.coolwinks.users.ui
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.coolwinks.RecyclerViewItemClickListener
+import com.android.coolwinks.users.model.User
 
-class UserAdapter(private val recyclerViewItemClickListener: RecyclerViewItemClickListener) :
+class UserMessageAdapter(val recyclerViewItemClickListener: RecyclerViewItemClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var user = ArrayList<Int>()
+    var user = ArrayList<User>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        UserViewHolder(parent, recyclerViewItemClickListener)
+        UserMessageViewHolder(parent, recyclerViewItemClickListener)
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val user = user[position]
-        (holder as UserViewHolder).bindTo(user)
+        (holder as UserMessageViewHolder).bindTo(user)
     }
 
     override fun getItemCount(): Int {
         return user.size
     }
 
-    fun submitList(newUserIdList: List<Int>) {
+    fun getItemList(): ArrayList<User> {
+        return user
+    }
+
+    fun submitList(newUserList: List<User>) {
         user.clear()
-        user.addAll(newUserIdList)
+        user.addAll(newUserList)
         notifyDataSetChanged()
     }
 }

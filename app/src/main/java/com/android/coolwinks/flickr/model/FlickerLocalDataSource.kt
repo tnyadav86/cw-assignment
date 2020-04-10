@@ -2,8 +2,9 @@ package com.android.coolwinks.flickr.model
 
 import androidx.paging.DataSource
 import com.android.coolwinks.database.dao.PhotoDao
+import javax.inject.Inject
 
-class FlickerLocalDataSource(private val photoDao: PhotoDao) {
+class FlickerLocalDataSource @Inject constructor(private val photoDao: PhotoDao) {
 
     fun insertPhoto(photoList: List<Photo>, insertFinished: () -> Unit) {
         photoDao.insertAll(photoList)

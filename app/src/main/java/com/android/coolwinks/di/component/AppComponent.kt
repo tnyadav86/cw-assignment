@@ -1,10 +1,10 @@
-package com.android.coolwinks.di.user.component
+package com.android.coolwinks.di.component
 
 import android.app.Application
 import com.android.coolwinks.AppController
-import com.android.coolwinks.di.user.module.DataSourceModule
-import com.android.coolwinks.di.user.module.FragmentModule
-import com.android.coolwinks.di.user.module.ViewModelModule
+import com.android.coolwinks.di.module.DataSourceModule
+import com.android.coolwinks.di.module.FragmentModule
+import com.android.coolwinks.di.module.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
