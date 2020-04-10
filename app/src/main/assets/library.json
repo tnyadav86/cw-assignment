@@ -1,5 +1,9 @@
 [
   {
+    "title": "Dagger2",
+    "descriptions": "com.google.dagger:dagger:2.27\ncom.google.dagger:dagger-android-support:2.27\ncom.google.dagger:dagger-compiler:2.27\ncom.google.dagger:dagger-android-processor:2.27"
+  },
+  {
     "title": "Navigation component",
     "descriptions": "androidx.navigation:navigation-fragment-ktx:2.2.1'\nandroidx.navigation:navigation-ui-ktx:2.2.1"
   },
@@ -17,23 +21,19 @@
   },
   {
     "title": "Room",
-    "descriptions": "androidx.room:room-runtime:2.2.5'\nandroidx.room:room-compiler:2.2.5'\nandroidx.room:room-ktx:2.2.5'\n'androidx.paging:paging-runtime:2.1.2'"
+    "descriptions": "androidx.room:room-runtime:2.2.5'\nandroidx.room:room-compiler:2.2.5\nandroidx.room:room-ktx:2.2.5\n'androidx.paging:paging-runtime:2.1.2'"
   },
   {
     "title": "Retrofit",
-    "descriptions": "com.squareup.okhttp3:logging-interceptor:4.4.1'\ncom.squareup.retrofit2:retrofit:2.8.1'\ncom.squareup.retrofit2:converter-scalars:2.8.1'\n'com.squareup.retrofit2:converter-gson:2.8.1'"
+    "descriptions": "com.squareup.okhttp3:logging-interceptor:4.4.1\ncom.squareup.retrofit2:retrofit:2.8.1\ncom.squareup.retrofit2:converter-scalars:2.8.1\n'com.squareup.retrofit2:converter-gson:2.8.1"
   },
   {
-    "title": "",
-    "descriptions": ""
+    "title": "Glide",
+    "descriptions": "com.github.bumptech.glide:glide:4.11.0'\ncom.github.bumptech.glide:compiler:4.11.0\ncom.github.bumptech.glide:okhttp3-integration:4.4.0"
   },
   {
-    "title": "",
-    "descriptions": ""
-  },
-  {
-    "title": "",
-    "descriptions": ""
+    "title": "Others",
+    "descriptions": "com.intuit.sdp:sdp-android:1.0.6\njoda-time:joda-time:2.10.5\ncom.github.MikeOrtiz:TouchImageView:2.3.2"
   },
   {
     "title": "",
