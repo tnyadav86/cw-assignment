@@ -1,6 +1,7 @@
 package com.android.coolwinks.di.module
 
 import android.app.Application
+import android.content.res.AssetManager
 import com.android.coolwinks.database.AppDatabase
 import com.android.coolwinks.database.dao.PhotoDao
 import com.android.coolwinks.database.dao.UserDao
@@ -24,6 +25,12 @@ class DataSourceModule {
     @Provides
     fun providePhotoDao(application: Application): PhotoDao {
         return AppDatabase.getInstance(application.applicationContext).photoDao()
+    }
+
+    @Provides
+    fun provideAssetManager(application: Application): AssetManager{
+        return  application.assets
+
     }
 
 }

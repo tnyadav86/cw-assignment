@@ -1,6 +1,7 @@
 package com.android.coolwinks.di.module
 
 import com.android.coolwinks.flickr.ui.FlickrFragment
+import com.android.coolwinks.libraries.ui.LibrariesFragment
 import com.android.coolwinks.users.ui.UserFragment
 import com.android.coolwinks.users.ui.UserMessageFragment
 import dagger.Module
@@ -16,4 +17,7 @@ abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract fun flickrFragment(): FlickrFragment
+
+    @ContributesAndroidInjector
+    abstract fun librariesFragment(): LibrariesFragment
 }

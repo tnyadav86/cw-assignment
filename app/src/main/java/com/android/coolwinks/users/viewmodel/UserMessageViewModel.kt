@@ -11,13 +11,13 @@ class UserMessageViewModel @Inject constructor(val repository: UserMessageReposi
 
     private val userIdLiveData = MutableLiveData<Int>()
     val allUserMessageById = userIdLiveData.switchMap {
-            repository.getUsersByUserId(it)
+        repository.getUsersByUserId(it)
 
 
     }
 
-   fun getAllUserMessageById(userId:Int){
-       userIdLiveData.value=userId
+    fun getAllUserMessageById(userId: Int) {
+        userIdLiveData.value = userId
 
-   }
+    }
 }

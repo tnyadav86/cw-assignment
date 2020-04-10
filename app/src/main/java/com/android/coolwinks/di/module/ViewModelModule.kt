@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.coolwinks.di.ViewModelKey
 import com.android.coolwinks.factory.AppViewModelFactory
 import com.android.coolwinks.flickr.viewmodel.FlickrViewModel
+import com.android.coolwinks.libraries.viewmodel.LibraryViewModel
 import com.android.coolwinks.users.viewmodel.UserMessageViewModel
 import com.android.coolwinks.users.viewmodel.UserViewModel
 import dagger.Binds
@@ -33,4 +34,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(FlickrViewModel::class)
     abstract fun bindFlickrViewModel(viewmodel: FlickrViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LibraryViewModel::class)
+    abstract fun bindLibraryViewModel(viewmodel: LibraryViewModel): ViewModel
 }

@@ -43,7 +43,7 @@ class UserMessageViewHolder(
         } else {
             itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.grayLight))
         }
-        if (!user!!.isExpended){
+        if (!user.isExpended){
             title.setElegantTextHeight(false);
             title.setInputType(InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
             title.setSingleLine(true)
