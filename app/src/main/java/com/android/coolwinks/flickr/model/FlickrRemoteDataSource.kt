@@ -6,13 +6,13 @@ import retrofit2.Call
 import retrofit2.Response
 import javax.inject.Inject
 
-class FlickrRemoteDataSource @Inject constructor(private val service: ApiService) {
+class FlickrRemoteDataSource @Inject constructor(private val service: ApiService,private val apiKey:String) {
     fun getPhotoFromFlickrAPI(
         page: String, perPage: String,
         onSuccess: (photos: Photos) -> Unit,
         onError: (error: String) -> Unit
     ) {
-        val call = service.getDataFromFlickrApi(page = page, per_page = perPage)
+        val call = service.getDataFromFlickrApi(page = page, per_page = perPage,api_key = apiKey)
         call.enqueue(object : retrofit2.Callback<FlickrDataResponse> {
             override fun onFailure(call: Call<FlickrDataResponse>, t: Throwable) {
                 if (t is IOException) {

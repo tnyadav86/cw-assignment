@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">CoolWings</string>
+    <string name="app_name">CoolWinks</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="user">Users</string>
     <string name="flickr">Flickr</string>
     <string name="libraries">Libraries</string>
+    <string name="api_key">e449b259146e14b0d55e770fb3577436</string>
 </resources>

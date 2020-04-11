@@ -13,6 +13,7 @@ class FlickrBoundaryCondition(
 ) : PagedList.BoundaryCallback<Photo>() {
 
     private var lastRequestedPage = AppConstant.FLICKR_INITIAL_PAGE
+    private var totalPages = 0
 
     val _taskStatusLiveData = MutableLiveData<TaskStatusResult>()
     // LiveData of network errors.
@@ -32,6 +33,7 @@ class FlickrBoundaryCondition(
             PAGE_SIZE.toString(),
             {
                 lastRequestedPage = it.page
+                totalPages = it.pages
                 flickerLocalDataSource.insertPhoto(it.photo) {
                     _taskStatusLiveData.postValue(TaskStatusResult.Success())
                     isRequestInProgress = false
@@ -45,6 +47,7 @@ class FlickrBoundaryCondition(
     }
 
     override fun onItemAtEndLoaded(itemAtEnd: Photo) {
+        if (lastRequestedPage==totalPages) return
         if (isRequestInProgress) return
         isRequestInProgress = true
         lastRequestedPage++

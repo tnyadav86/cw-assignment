@@ -15,7 +15,7 @@ interface ApiService {
     @GET("services/rest/")
     fun getDataFromFlickrApi(
         @Query("method") method: String = "flickr.photos.getRecent",
-        @Query("api_key") api_key: String = "e449b259146e14b0d55e770fb3577436",
+        @Query("api_key") api_key: String,
         @Query("extras") extras: String = "date_upload,last_update,media,url_q,url_z",
         @Query("format") format: String = "json",
         @Query("nojsoncallback") nojsoncallback: String = "1",

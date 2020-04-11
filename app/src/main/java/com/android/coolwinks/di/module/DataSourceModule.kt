@@ -2,6 +2,7 @@ package com.android.coolwinks.di.module
 
 import android.app.Application
 import android.content.res.AssetManager
+import com.android.coolwings.R
 import com.android.coolwinks.database.AppDatabase
 import com.android.coolwinks.database.dao.PhotoDao
 import com.android.coolwinks.database.dao.UserDao
@@ -30,6 +31,12 @@ class DataSourceModule {
     @Provides
     fun provideAssetManager(application: Application): AssetManager{
         return  application.assets
+
+    }
+
+    @Provides
+    fun provideApiKey(application: Application): String{
+        return  application.getString(R.string.api_key)
 
     }
 
